@@ -11,9 +11,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-
-
-
 #[UniqueEntity('email')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\EntityListeners(['App\EntityListener\UserListener'])]
@@ -46,11 +43,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     #[ORM\Column(type : 'string')]
-    #[Assert\NoBlank()]
+    #[Assert\NotBlank()]
     private ?string $password = null;
 
-    
+
     private  ?string $plainPassword = null;
+
+    private  ?string $newPassword = null;
 
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\NoNull()]
@@ -124,8 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-
-    public function getPlainPassword(): string
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
@@ -136,6 +134,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+
+    public function setNewPassword(string $newPassword): static
+    {
+        $this->newPassword = $newPassword;
+
+        return $this;
+    }
+
 
     /**
      * @see UserInterface
