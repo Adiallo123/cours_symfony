@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container mt-4">
-    {% if ingredients %}
+    {% if not ingredients.items is same as([]) %}
         <h1>Mes Ingrédients</h1>
 
         <a href="{{ path('ingredient.new')}}" class="btn btn-primary"> Créer un ingrédient </a>

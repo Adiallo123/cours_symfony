@@ -4,6 +4,8 @@ namespace App\Entity;
 
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -55,10 +57,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NoNull()]
     private ?\DateTimeImmutable $createAt = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Ingredients::class, orphanRemoval: true)]
+    private Collection $listIngredient;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Recettes::class, orphanRemoval: true)]
+    private Collection $ListRecette;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Recettes::class)]
+    private Collection $ListeRcette;
+
 
     public function __construct()
     {
         $this->createAt = new \DateTimeImmutable();
+        $this->listIngredient = new ArrayCollection();
+        $this->ListRecette = new ArrayCollection();
+        $this->ListeRcette = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -192,4 +206,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Ingredients>
+     */
+    public function getListIngredient(): Collection
+    {
+        return $this->listIngredient;
+    }
+
+    public function addListIngredient(Ingredients $listIngredient): static
+    {
+        if (!$this->listIngredient->contains($listIngredient)) {
+            $this->listIngredient->add($listIngredient);
+            $listIngredient->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListIngredient(Ingredients $listIngredient): static
+    {
+        if ($this->listIngredient->removeElement($listIngredient)) {
+            // set the owning side to null (unless already changed)
+            if ($listIngredient->getUser() === $this) {
+                $listIngredient->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Recettes>
+     */
+    public function getListeRcette(): Collection
+    {
+        return $this->ListeRcette;
+    }
+
+    public function addListeRcette(Recettes $listeRcette): static
+    {
+        if (!$this->ListeRcette->contains($listeRcette)) {
+            $this->ListeRcette->add($listeRcette);
+            $listeRcette->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListeRcette(Recettes $listeRcette): static
+    {
+        if ($this->ListeRcette->removeElement($listeRcette)) {
+            // set the owning side to null (unless already changed)
+            if ($listeRcette->getUser() === $this) {
+                $listeRcette->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+ 
 }

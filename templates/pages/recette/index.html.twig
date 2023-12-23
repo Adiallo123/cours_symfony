@@ -5,7 +5,7 @@
 {% block body %}
  <div class=" container mt-4 ">
     <h1> Mes Recettes </h1>
-    {% if Recettes %}
+    {% if not Recettes.items is same as([]) %}
         <a href="{{ path('recette.new')}}" class="btn btn-primary"> Créer une recette </a>
         {% for message in app.flashes('success') %}
         <div class="alert alert-success mt-4">

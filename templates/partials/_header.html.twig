@@ -11,16 +11,49 @@
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
-       <li class="nav-item">
+      
+
+      {% if app.user  %}
+
+        <li class="nav-item">
           <a class="nav-link" href="{{path ('app_ingredient') }}">Ingrédients</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{path ('app_recette') }}">Recettes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{path ('security.login') }}">Connexion</a>
-        </li>
-      </ul>
+        </ul>
+
+        <div class="d-flex" >
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item dropdown" style="margin-right: 5rem;">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" 
+              role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.fullname }}</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{path ('user.edit', {id: app.user.id}) }}">Modifier mes informations</a>
+                <a class="dropdown-item" href="{{path ('user.edit.password', {id: app.user.id} ) }}">Modifier mon mot de passe</a>
+                <a class="dropdown-item" href="{{ path ('security.logout')}}">Deconnexion</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      
+        
+      {% else %}
+        <div class="d-flex" >
+           <ul class="navbar-nav me-auto">
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{path ('security.login') }}">Connexion</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{path ('security.inscription') }}">Inscription</a>
+            </li>
+
+          </ul>
+        </div>
+      {% endif %}
+     
     </div>
   </div>
 </nav>
