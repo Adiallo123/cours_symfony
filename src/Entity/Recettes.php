@@ -22,8 +22,8 @@ class Recettes
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 50)]
-    #[Assert\NoBlank()]
-    #[Assert\Lenght(min: 2, max: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $name = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
@@ -42,7 +42,7 @@ class Recettes
     private ?int $difficulty = null;
 
     #[ORM\Column(type: 'text', length: 255)]
-    #[Assert\NoBlank()]
+    #[Assert\NotBlank]
     private ?string $description = null;
 
     #[ORM\Column(type: 'float')]
@@ -69,13 +69,22 @@ class Recettes
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column]
+    private ?bool $isPublic = null;
+
+    private ?float $average = null;
+
+    #[ORM\OneToMany(mappedBy: 'recette', targetEntity: Mark::class)]
+    private Collection $marks;
+
    
 
     public function __construct()
     {
         $this->ListeIngredients = new ArrayCollection();
-        $this->createAt =  new \DateTimeImmutable;
+        $this->createAt =  new \DateTimeImmutable();
         $this->updateAt = new \DateTimeImmutable();
+        $this->marks = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -231,6 +240,66 @@ class Recettes
         $this->user = $user;
 
         return $this;
+    }
+
+    public function isIsPublic(): ?bool
+    {
+        return $this->isPublic;
+    }
+
+    public function setIsPublic(bool $isPublic): static
+    {
+        $this->isPublic = $isPublic;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Mark>
+     */
+    public function getMarks(): Collection
+    {
+        return $this->marks;
+    }
+
+    public function addMark(Mark $mark): static
+    {
+        if (!$this->marks->contains($mark)) {
+            $this->marks->add($mark);
+            $mark->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMark(Mark $mark): static
+    {
+        if ($this->marks->removeElement($mark)) {
+            // set the owning side to null (unless already changed)
+            if ($mark->getRecette() === $this) {
+                $mark->setRecette(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAverage():float
+    {
+        $mark = $this->marks;
+
+        if($mark->toArray()  === []){
+            $this->average = $mark;
+            return $this->average;
+        }
+
+        $total = 0;
+
+        foreach ($mark as $marks) {
+            $total += $marks->getMark();
+        }
+        $this->average = $total / count($mark);
+        return $this->average;
     }
 
    

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mes Recettes {% endblock %}
+
+{% block body %}
+ <div class="recette">
+ <div class=" container mt-4 ">
+    <h1 > Recettes de la communauté </h1>
+
+   {% for r in recette %}
+   <div class="d-flex justify-content-center flex-nowrap">
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Recette N° {{ r.id}}</div>
+            <div class="card-body">
+            <h4 class="card-title">{{ r.name }}</h4>
+            <p class="card-text"> {{ r.description|slice(0, 100) ~ '...' }} </p>
+        </div>
+    </div>
+   {% endfor %}
+
+ </div>
+
+{% endblock %}

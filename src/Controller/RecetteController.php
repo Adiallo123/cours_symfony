@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Mark;
 use App\Entity\Recettes;
+use App\Form\MarkType;
 use App\Form\RecetteType;
+use App\Repository\MarkRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\RecettesRepository;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -106,9 +110,77 @@ class RecetteController extends AbstractController
 
     }
 
+    #[Route('/recette/public', name:'recette.index.public', methods:'GET')]
+    public function indexPublic(
+        RecettesRepository $repository,
+        PaginatorInterface $pagination,
+        Request $request
+    ) : Response
+    {
+        $recettes = $pagination->paginate(
+            $repository->findPublicRecette(null),
+            $request->query->getInt('page', 1),
+            10
+        );
+        return $this->render('pages/recette/index_public.html.twig', [
+            'recette' => $recettes
+        ]);
+    }
+
+
+    #[Security("is_granted('ROLE_USER') and recette.isIsPublic() === true")]
+    #[Route('/recette/{id}', name:'recette.show', methods:['GET', 'POST'])]
+    public function show (
+        Recettes $recette, 
+        Request $request,
+        MarkRepository $markRepository,
+        EntityManagerInterface $manager
+        
+    ): Response
+    {
+        $mark = new Mark();
+        $form = $this->createForm(MarkType::class, $mark);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $mark->setUser($this->getUser())
+                ->setRecette($recette);
+        
+
+            $existingMark = $markRepository->findOneBy([
+                'user' => $this->getUser(),
+                'recette' => $recette,
+            ]);
+
+           if(!$existingMark){
+            
+                $manager->persist($mark);
+            }
+            else{
+              $existingMark->setMark(
+                $form->getData()->getMark()
+              );
+            }
+
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'votre note à bien été enregister'
+            );
+
+            return $this->redirectToRoute('recette.show', ['id' => $recette->getId() ]);
+
+            
+        }
+
+        return $this->render('pages/recette/show.html.twig', [
+            'recette' => $recette,
+            'form' => $form
+        ]);
+    }
 
     #[Route('/recette/suppression/{id}', name:'recette.delete', methods:['GET'])]
-    
     public function delete(Recettes $recettes, EntityManagerInterface $manager): Response
     {
         $manager->remove($recettes);

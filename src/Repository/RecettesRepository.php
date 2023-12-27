@@ -21,6 +21,21 @@ class RecettesRepository extends ServiceEntityRepository
         parent::__construct($registry, Recettes::class);
     }
 
+    public function findPublicRecette(?int $nbRecette): array
+    {
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->where('r.isPublic = 1')
+            ->orderBy('r.createAt', 'DESC');
+
+        if ($nbRecette !== 0 || $nbRecette !==null )
+        {
+            $queryBuilder->setMaxResults($nbRecette);
+        }
+          
+          return  $queryBuilder->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Recettes[] Returns an array of Recettes objects
 //     */

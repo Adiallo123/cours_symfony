@@ -18,8 +18,8 @@ class Ingredients
     private ?int $id;
 
     #[ORM\Column(type: 'string', length: 50)]
-    #[Assert\NoBlank()]
-    #[Assert\Lenght(min: 2, max: 50)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $name;
 
     #[ORM\Column(type: 'float')]
@@ -83,7 +83,7 @@ class Ingredients
 
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->created_at = $created_at;
+        $this->created_at = $createdAt;
 
         return $this;
     }

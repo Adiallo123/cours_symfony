@@ -27,7 +27,7 @@ class RecetteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::Class, [
+            ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minLenght' => '2',
@@ -44,7 +44,7 @@ class RecetteType extends AbstractType
     
                 ])
                 
-            ->add('time', IntegerType::Class, [
+            ->add('time', IntegerType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'min' => '1',
@@ -63,7 +63,7 @@ class RecetteType extends AbstractType
 
                 ])
 
-            ->add('nbPeople', IntegerType::Class, [
+            ->add('nbPeople', IntegerType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'min' => '1',
@@ -81,7 +81,7 @@ class RecetteType extends AbstractType
                 ]
                 ])
 
-            ->add('difficulty' , RangeType::Class, [
+            ->add('difficulty' , RangeType::class, [
                 'attr' => [
                     'class' => 'form-range',
                     'min' => '1',
@@ -100,7 +100,7 @@ class RecetteType extends AbstractType
 
                 ])
 
-            ->add('description', TextareaType::Class, [
+            ->add('description', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'min' => '1',
@@ -118,7 +118,7 @@ class RecetteType extends AbstractType
 
                 ])
 
-            ->add('price', MoneyType::Class, [
+            ->add('price', MoneyType::class, [
                 'attr' => [
                     'class' => 'form-control mt-4',
                 ],
@@ -158,7 +158,7 @@ class RecetteType extends AbstractType
                 }
             ])
 
-            ->add('submit', SubmitType::Class, [
+            ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4',
                 ],

@@ -6,6 +6,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Ingredients;
+use App\Entity\Mark;
 use App\Entity\Recettes;
 use App\Entity\User;
 use Faker\Generator;
@@ -63,7 +64,7 @@ class AppFixtures extends Fixture
         }
 
         //les recettes
-
+        $arrayRecette = [];
         for($j=1; $j<20; $j++)
         {
             $recettes = new Recettes();
@@ -74,20 +75,36 @@ class AppFixtures extends Fixture
                 ->setDescription($this->faker->text(255))
                 ->setPrice(mt_rand(0, 1) == 1 ? mt_rand(1, 1000) : 0)
                 ->setIsFavorite(mt_rand(0, 1) == 1 ? true : false)
+                ->setIsPublic(mt_rand(0, 1) == 1 ? true :false)
                 ->setUser($arrayUser[mt_rand(0, count($arrayUser) -1)]);
                 
 
             for($k=1; $k< mt_rand(5, 15); $k++)
             {
                 $recettes->addListeIngredient($arrayIngredients[mt_rand(0, count($arrayIngredients) -1)]);
-                
+
+                $arrayRecette[] = $recettes;
                 $manager->persist($recettes);
 
+            }
+
+            
+        }
+
+        //mark
+        foreach($arrayRecette as $recette)
+        {
+            for ($i=0; $i < mt_rand(0, 4); $i++) { 
+                $mark = new Mark();
+                $mark->setMark(mt_rand(1, 5))
+                    ->setUser($arrayUser[mt_rand(0, count($arrayUser) -1)])
+                    ->setRecette($recette);
+
+                $manager->persist($mark);
             }
         }
 
        
-
         $manager->flush();
 
        
