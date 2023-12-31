@@ -14,8 +14,5 @@ return [
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
-<<<<<<< HEAD
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
-=======
->>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
 ];

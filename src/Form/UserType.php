@@ -17,7 +17,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('fullname', TextType::Class, [
+        ->add('fullname', TextType::class, [
             'attr' => [
                 'class' => 'form-control',
                 'minLenght' => '2',
@@ -33,7 +33,7 @@ class UserType extends AbstractType
             ]
             ])
 
-        ->add('pseudo', TextType::Class, [
+        ->add('pseudo', TextType::class, [
             'attr' => [
                 'class' => 'form-control',
                 'minLenght' => '2',
@@ -48,7 +48,7 @@ class UserType extends AbstractType
             ]
             ])
 
-            ->add('plainPassword', PasswordType::Class, [
+            ->add('plainPassword', PasswordType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -58,7 +58,7 @@ class UserType extends AbstractType
                 ],
             ])
     
-        ->add('submit', SubmitType::Class, [
+        ->add('submit', SubmitType::class, [
             'attr' => [
                 'class' => 'btn btn-primary mt-4',
             ],

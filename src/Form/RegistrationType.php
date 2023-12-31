@@ -18,7 +18,7 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('fullname', TextType::Class, [
+            ->add('fullname', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minLenght' => '2',
@@ -34,7 +34,7 @@ class RegistrationType extends AbstractType
                 ]
                 ])
 
-            ->add('pseudo', TextType::Class, [
+            ->add('pseudo', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minLenght' => '2',
@@ -50,7 +50,7 @@ class RegistrationType extends AbstractType
     
                 ])
 
-            ->add('email', EmailType::Class, [
+            ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minLenght' => '2',
@@ -95,7 +95,7 @@ class RegistrationType extends AbstractType
                 'invalid_message' => 'Les deux mots de passe de correspondent pas.',
             ])
 
-            ->add('submit', SubmitType::Class, [
+            ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4',
                 ],

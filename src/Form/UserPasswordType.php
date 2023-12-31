@@ -44,7 +44,7 @@ class UserPasswordType extends AbstractType
             'invalid_message' => 'Les deux mots de passe de correspondent pas.',
         ])
 
-        ->add('newPassword', PasswordType::Class, [
+        ->add('newPassword', PasswordType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -54,7 +54,7 @@ class UserPasswordType extends AbstractType
                 ],
             ])
     
-        ->add('submit', SubmitType::Class, [
+        ->add('submit', SubmitType::class, [
             'attr' => [
                 'class' => 'btn btn-primary mt-4',
             ],

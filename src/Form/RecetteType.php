@@ -20,11 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-<<<<<<< HEAD
 use Vich\UploaderBundle\Form\Type\VichImageType;
-=======
-
->>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
 
 class RecetteType extends AbstractType
 {
@@ -147,7 +143,6 @@ class RecetteType extends AbstractType
                 'required' => false
             ])
 
-<<<<<<< HEAD
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image de la Recette',   
                 'attr' => [
@@ -155,8 +150,6 @@ class RecetteType extends AbstractType
                 ]
                
             ])
-=======
->>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
 
             ->add('ListeIngredients', EntityType::class, [
                 'class' => Ingredients::class,
@@ -172,11 +165,6 @@ class RecetteType extends AbstractType
                 }
             ])
 
-<<<<<<< HEAD
-          
-
-=======
->>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4',

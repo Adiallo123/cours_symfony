@@ -23,18 +23,12 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/deconnexion', name:'security.logout', methods:['GET', 'POST'])]
-    public function logout(): Response
-    {
-
-    }
-
     #[Route('/inscription', name:'security.inscription', methods:['GET', 'POST'])]
-    public function Registration(Request $request, EntityManagerInterface $manager ):Response
+    public function Registration(Request $request, EntityManagerInterface $manager ): Response
     {
         $user = new User();
         $user->setRoles(['ROLE_USER']);
-        $form = $this->CreateForm(RegistrationType::Class, $user);
+        $form = $this->CreateForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
@@ -50,8 +44,15 @@ class SecurityController extends AbstractController
 
             return $this->redirectToRoute('security.login');
         }
+        
         return $this->render('pages/security/registration.html.twig', [
             'form' => $form
         ]);
     }
+
+    #[Route('/deconnexion', name:'security.logout', methods:['GET', 'POST'])]
+   public function logout(): Response
+   {
+     return $this->render('pages/home.html.twig');
+   }
 }

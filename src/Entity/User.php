@@ -25,22 +25,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     
     #[ORM\Column(type : 'string', length: 255)]
-    #[Assert\NoBlank()]
-    #[Assert\Lenght(min: 2, max: 50)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $fullname = null;
 
     #[ORM\Column(type : 'string', length: 50, nullable: true)]
-    #[Assert\Lenght(min: 2, max: 50)]
+    #[Assert\length(min: 2, max: 50)]
     private ?string $pseudo = null;
 
 
     #[ORM\Column(type : 'string', length: 180, unique: true)]
     #[Assert\Email()]
-    #[Assert\Lenght(min: 2, max: 50)]
+    #[Assert\length(min: 2, max: 50)]
     private ?string $email = null;
 
     #[ORM\Column(type: 'json')]
-    #[Assert\NoNull()]
+    #[Assert\NotNull()]
     private array $roles = [];
 
 
@@ -54,7 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private  ?string $newPassword = null;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\NoNull()]
+    #[Assert\NotNull()]
     private ?\DateTimeImmutable $createAt = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Ingredients::class, orphanRemoval: true)]
