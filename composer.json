@@ -38,12 +38,20 @@
         "symfony/string": "6.3.*",
         "symfony/translation": "6.3.*",
         "symfony/twig-bundle": "6.3.*",
+<<<<<<< HEAD
         "symfony/validator": "^6.4",
         "symfony/web-link": "6.3.*",
         "symfony/yaml": "6.3.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
         "vich/uploader-bundle": "^2.3"
+=======
+        "symfony/validator": "6.3.*",
+        "symfony/web-link": "6.3.*",
+        "symfony/yaml": "6.3.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0"
+>>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
     },
     "config": {
         "allow-plugins": {

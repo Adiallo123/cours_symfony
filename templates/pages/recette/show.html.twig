@@ -17,6 +17,7 @@
             <span href="" class="badge bg-primary"> Créer le {{ recette.createAt | date("m/d/Y") }} </span>
         </div>
 
+<<<<<<< HEAD
         <div class="recette_image mt-4">
             <img src="{{ vich_uploader_asset(recette,  'imageFile') }}" alt="image">
 
@@ -24,6 +25,10 @@
 
         <div class="mt-4">
             <p> La moyenne de la recette est: {{ recette.average|number_format(2, '.', ',')}}/5  </p>
+=======
+        <div class="mt-4">
+            <p> La moyenne de la recette est: {{ recette.average|number_format(2, '.', ',')}} /5  </p>
+>>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
         </div>
 
         {% if recette.time  %}

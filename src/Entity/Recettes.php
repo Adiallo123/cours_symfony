@@ -5,16 +5,26 @@ namespace App\Entity;
 use App\Repository\RecettesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+<<<<<<< HEAD
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+=======
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+>>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
 
 
 #[ORM\Entity(repositoryClass: RecettesRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+<<<<<<< HEAD
 #[Vich\Uploadable]
+=======
+>>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
 #[UniqueEntity('name')]
 class Recettes
 {
@@ -67,18 +77,26 @@ class Recettes
     #[ORM\ManyToMany(targetEntity: ingredients::class)]
     private Collection $ListeIngredients;
 
+<<<<<<< HEAD
     #[Vich\UploadableField(mapping: 'recette_image', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $imageName = null;
 
+=======
+>>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
     #[ORM\ManyToOne(inversedBy: 'ListeRcette')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+<<<<<<< HEAD
     #[ORM\Column(type: 'boolean')]
     private ?bool $isPublic = false;
+=======
+    #[ORM\Column]
+    private ?bool $isPublic = null;
+>>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
 
     private ?float $average = null;
 
@@ -310,6 +328,7 @@ class Recettes
         return $this->average;
     }
 
+<<<<<<< HEAD
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
@@ -335,5 +354,7 @@ class Recettes
     {
         return $this->imageName;
     }
+=======
+>>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
    
 }

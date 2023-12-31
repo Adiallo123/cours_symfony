@@ -82,7 +82,11 @@ class RecetteController extends AbstractController
     
      
     #[Route('/recette/edition/{id}', name:'recette.edit', methods:['GET', 'POST'])]
+<<<<<<< HEAD
     #[Security("is_granted('ROLE_USER') and user === recettes.getUser() || user === recettes.getUser()")]
+=======
+    #[Security("is_granted('ROLE_USER') and user === recettes.getUser()")]
+>>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
     public function edit(Recettes $recettes , Request $request, EntityManagerInterface $manager): Response
     {
 
@@ -128,7 +132,11 @@ class RecetteController extends AbstractController
     }
 
 
+<<<<<<< HEAD
     #[Security("is_granted('ROLE_USER') and recette.isIsPublic() === true  || user === recette.getUser()")]
+=======
+    #[Security("is_granted('ROLE_USER') and recette.isIsPublic() === true")]
+>>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
     #[Route('/recette/{id}', name:'recette.show', methods:['GET', 'POST'])]
     public function show (
         Recettes $recette, 

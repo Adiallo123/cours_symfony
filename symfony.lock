@@ -281,6 +281,7 @@
     },
     "twig/extra-bundle": {
         "version": "v3.8.0"
+<<<<<<< HEAD
     },
     "vich/uploader-bundle": {
         "version": "2.3",
@@ -293,5 +294,7 @@
         "files": [
             "./config/packages/vich_uploader.yaml"
         ]
+=======
+>>>>>>> c52ab288f063aaa5b60fa48f3b004f773c448abb
     }
 }
