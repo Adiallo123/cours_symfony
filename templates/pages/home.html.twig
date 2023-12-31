@@ -1,0 +1,33 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %} 
+   SymRecipie - Accueil. 
+{% endblock %} 
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="display-4"> Bonjour et bienvenue sur SymRecipie</h1></h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>Pour commencer rendez sur la page d'inscrisption pour utiliser l'application.</p>
+        <a class="btn btn-primary btn-lg" href="{{path('security.inscription')}}" role="button">Inscription</a>
+
+        {% for r in recette %}
+        <div class="d-flex justify-content-center flex-nowrap ">
+             <div class="card border-primary mb-3" style="max-width: 20rem;">
+                 <div class="card-header">Recette N° {{ r.id}}</div>
+                 <div class="card-body">
+                 <h4 class="card-title">{{ r.name }}</h4>
+                 <p class="card-text"> {{ r.description|slice(0, 100) ~ '...' }} </p>
+                 <a class="badge bg-primary" href="{{ path('recette.show', {id : r.id}) }} ">Voir la recette</a>
+             </div>
+         </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+
+
+

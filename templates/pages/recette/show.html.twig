@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} show - recette {% endblock %}
+
+{% block body %}
+    <div class=" container mt-4 ">
+
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        <h1> {{recette.name }}</h1>
+
+        <div class="mt-4">
+            <span href="" class="badge bg-primary"> Créer le {{ recette.createAt | date("m/d/Y") }} </span>
+        </div>
+
+        <div class="recette_image mt-4">
+            <img src="{{ vich_uploader_asset(recette,  'imageFile') }}" alt="image">
+
+        </div>
+
+        <div class="mt-4">
+            <p> La moyenne de la recette est: {{ recette.average|number_format(2, '.', ',')}}/5  </p>
+        </div>
+
+        {% if recette.time  %}
+            <div class="mt-4">
+                <p>Temps (en minute): {{ recette.time }} </p>
+            </div>
+        {% else %}
+            <div class="mt-4">
+                <p>Temps Non Renseigné </p>
+            </div>
+        {% endif %}
+
+        {% if recette.difficulty  %}
+        <div class="mt-4">
+            <p>Difficulty: {{ recette.difficulty }} </p>
+        </div>
+        {% else %}
+            <div class="mt-4">
+                <p> Difficulté Non Renseigné </p>
+            </div>
+        {% endif %}
+
+        {% if recette.nbPeople  %}
+        <div class="mt-4">
+            <p>Nombre de personne: {{ recette.nbPeople }} </p>
+        </div>
+        {% else %}
+            <div class="mt-4">
+                <p> Nombre de personne: Non Renseigné </p>
+            </div>
+        {% endif %}
+
+        {% if recette.price != 0  %}
+        <div class="mt-4">
+            <p> Prix: {{ recette.nbPeople }} euros</p>
+        </div>
+        {% else %}
+            <div class="mt-4">
+                <p> Nombre de personne Non Renseigné </p>
+            </div>
+        {% endif %}
+
+        <div class="mt-4">
+            <p>Description: {{ recette.description }} </p>
+        </div>
+
+        <div class="mt-4">
+            <h2>Les Ingrédients</h2>
+            {% for ingredient in recette.ListeIngredients %}
+                    <span href="" class="badge bg-primary"> {{ ingredient.name }} </span>
+            {% endfor %}
+        </div>
+
+        {{form(form)}}
+    
+    </div>
+
+{% endblock %}
